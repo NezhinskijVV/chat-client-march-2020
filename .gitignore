@@ -1,0 +1,4 @@
+# Project exclude paths
+/target/
+/.idea/
+/chat-client-march-2020.iml
