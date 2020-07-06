@@ -1,8 +1,5 @@
 import lombok.SneakyThrows;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Client {
@@ -17,13 +14,27 @@ public class Client {
             MessageReceiver messageConsoleReceiver = new MessageReceiver(System.in);
             MessageSender messageSender = new MessageSender(socket.getOutputStream());
 
+            registration(messageConsoleReceiver, messageSender);
+
             new Thread(new SocketRunnable(socket)).start();
 
             String messageFromConsole;
             while ((messageFromConsole = messageConsoleReceiver.readMessage()) != null) {
-               messageSender.sendMessage(messageFromConsole);
+                messageSender.sendMessage(messageFromConsole);
             }
         }
+    }
 
+    public void registration(MessageReceiver messageReceiver, MessageSender messageSender) {
+        System.out.println("----------------------------------");
+        System.out.println("Добро пожаловать в наш Чат!");
+        System.out.println("----------------------------------");
+
+        System.out.println("Введите имя");
+        String name = messageReceiver.readMessage();
+        System.out.println("Введите пароль");
+        String password = messageReceiver.readMessage();
+
+        messageSender.sendMessage("Registration " + name + " " + password);
     }
 }
