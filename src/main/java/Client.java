@@ -35,6 +35,6 @@ public class Client {
         System.out.println("Введите пароль");
         String password = messageReceiver.readMessage();
 
-        messageSender.sendMessage("Registration " + name + " " + password);
+        messageSender.sendMessage("Authorization " + name + " " + password);
     }
 }
