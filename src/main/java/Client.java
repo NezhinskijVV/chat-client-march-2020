@@ -1,10 +1,15 @@
 import lombok.SneakyThrows;
+import utils.MyResourceBundle;
+import utils.Props;
 
 import java.net.Socket;
+import java.util.Locale;
 
 public class Client {
     private final static String IP = "localhost";
     private final static int PORT = 8081;
+    private final static MyResourceBundle RESOURCE_BUNDLE = new MyResourceBundle(
+            new Locale(Props.getValue("language"), Props.getValue("country")));
 
     @SneakyThrows
     public void start() {
@@ -27,7 +32,8 @@ public class Client {
 
     public void registrationOrAuthorization(MessageReceiver messageReceiver, MessageSender messageSender) {
         System.out.println("----------------------------------");
-        System.out.println("Добро пожаловать в наш Чат!");
+        System.out.println(RESOURCE_BUNDLE.getValue("welcome"));
+//        System.out.println("Добро пожаловать в наш Чат!");
         System.out.println("----------------------------------");
 
         System.out.println("Нажмите: \n -1 для авторизации \n -2 для регистрации");
